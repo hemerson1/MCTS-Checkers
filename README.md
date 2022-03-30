@@ -20,7 +20,7 @@ MCTS (Red) vs. Random Player (Gray)    |  MCTS (Red) vs. Human Player (Gray)
 conda create --name myenv python=3.7 
 conda activate myenv
 git clone https://github.com/hemerson1/MCTS-Checkers.git
-cd RLcycle
+cd MCTS-Checkers
 pip install -U -r requirements.txt
 pip install -e .
 ```
