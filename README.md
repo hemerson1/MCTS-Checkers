@@ -10,7 +10,7 @@ The package contains the code for:
 
 Here is an example of the MCTS performance after training on only 50 games of self play:
 
-MCTS (Red) vs. Random Player (Gray)    |  MCTS (Red) vs. Human Player (Gray)
+MCTS (Gray) vs. Random Player (Red)    |  MCTS (Gray) vs. Human Player (Red)
 :-------------------------------------:|:--------------------------------:
 ![](./videos/mcts_vs_random.gif)       |     ![](./videos/mcts_vs_player.gif)
 
