@@ -449,12 +449,12 @@ class MCTS_Actor(Actor):
     def save_values(self, filename):
         
         # save values dictionary        
-        values = open("./Values/values" + filename + ".pkl", "wb")
+        values = open("./values/values" + filename + ".pkl", "wb")
         pickle.dump(self.values, values)
         values.close()
         
         # save plays dictionary
-        plays = open("./Values/plays" + filename + ".pkl", "wb")
+        plays = open("./values/plays" + filename + ".pkl", "wb")
         pickle.dump(self.plays, plays)
         plays.close()
         
@@ -464,11 +464,11 @@ class MCTS_Actor(Actor):
     def load_values(self, filename):
         
         # load values dictionary 
-        values = open("./Values/values" + filename + ".pkl", "rb")
+        values = open("./values/values" + filename + ".pkl", "rb")
         values_dict = pickle.load(values)
         self.values = values_dict
         
         # load plays dictionary         
-        plays = open("./Values/plays" + filename + ".pkl", "rb")
+        plays = open("./values/plays" + filename + ".pkl", "rb")
         plays_dict = pickle.load(plays)
         self.plays = plays_dict 

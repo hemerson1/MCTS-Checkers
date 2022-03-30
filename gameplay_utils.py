@@ -9,8 +9,7 @@ Created on Tue Mar 29 18:47:54 2022
 from board import Board
 from agent import Random_Actor
 
-import time
-
+import time, imageio, os
 
 """
 Train Monte Carlo Tree Search via Self-Play
@@ -200,3 +199,20 @@ def play_player(agent_white, board, max_moves, visual="terminal"):
         if mov == (max_moves - 1):
             print('The game has ended as a stalemate!')
             break  
+
+
+def convert_image_to_gif(filename):   
+    
+    # append the path to the file names
+    filepath = os.path.abspath(os.getcwd()) + "/images/"
+    filenames = [filepath + file for file in os.listdir(filepath)]
+    filenames.sort()
+    filenames = filenames[1:]
+    
+    # convert to gif
+    images = []
+    for filename in filenames:
+        images.append(imageio.imread(filename))
+    
+    # save gif
+    imageio.mimsave('./videos/' + filename + '.gif', images, duration=1)
