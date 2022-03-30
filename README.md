@@ -1,6 +1,6 @@
 # Checker AI with Monte Carlo Tree Search  
 
-This is repository contains the code for playing checkers using Monte-Carlo-Tree-Search (MCTS). This project is an extension of the work performed at the 2021 Reinforcement Learning Summer School at the Turing Institute https://www.turing.ac.uk/. 
+This is repository contains the code for playing checkers using Monte-Carlo-Tree-Search (MCTS). The rules for the game were selected to conform to those of English Draughts (https://en.wikipedia.org/wiki/English_draughts). 
 
 The package contains the code for:
 * Simulating the board
@@ -24,6 +24,11 @@ cd RLcycle
 pip install -U -r requirements.txt
 pip install -e .
 ```
+
+## Reference
+
+This project is an extension of the work performed at the 2021 Reinforcement Learning Summer School at the Turing Institute (https://www.turing.ac.uk/). 
+
 
 ## Licence
 
