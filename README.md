@@ -1,4 +1,4 @@
-# Checker AI with Monte Carlo Tree Search  
+# Checkers AI with Monte Carlo Tree Search  
 
 This repository contains the code for playing checkers using Monte-Carlo-Tree-Search (MCTS). The rules for the game were selected to conform to those of English Draughts (https://en.wikipedia.org/wiki/English_draughts). 
 
