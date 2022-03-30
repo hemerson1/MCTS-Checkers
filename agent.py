@@ -446,29 +446,29 @@ class MCTS_Actor(Actor):
     """
     Save the learned values as a pickle file
     """
-    def save_values(self):
+    def save_values(self, filename):
         
         # save values dictionary        
-        values = open("./Values/values.pkl", "wb")
+        values = open("./Values/values" + filename + ".pkl", "wb")
         pickle.dump(self.values, values)
         values.close()
         
         # save plays dictionary
-        plays = open("./Values/plays.pkl", "wb")
+        plays = open("./Values/plays" + filename + ".pkl", "wb")
         pickle.dump(self.plays, plays)
         plays.close()
         
     """
     Load the pre-trained values from the pickle file
     """
-    def load_values(self):
+    def load_values(self, filename):
         
         # load values dictionary 
-        values = open("./Values/values.pkl", "rb")
+        values = open("./Values/values" + filename + ".pkl", "rb")
         values_dict = pickle.load(values)
         self.values = values_dict
         
         # load plays dictionary         
-        plays = open("./Values/plays.pkl", "rb")
+        plays = open("./Values/plays" + filename + ".pkl", "rb")
         plays_dict = pickle.load(plays)
         self.plays = plays_dict 

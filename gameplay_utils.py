@@ -7,7 +7,6 @@ Created on Tue Mar 29 18:47:54 2022
 """
 
 from board import Board
-from board_utils import get_moves, update_board
 from agent import Random_Actor
 
 import time
@@ -16,14 +15,14 @@ import time
 """
 Train Monte Carlo Tree Search via Self-Play
 """
-def train_mcts(mcts_agent, max_games, max_moves, size, current_knowledge=False, debug=False):
+def train_mcts(mcts_agent, max_games, max_moves, size, save_filename, load_filename=None, debug=False):
     
     agent_white = mcts_agent(player='white', size=size)    
     agent_black = mcts_agent(player='black', size=size)   
     
-    if current_knowledge:
-        print('Previous Values Loaded')
-        agent_white.load_values()
+    if load_filename != None:
+        print('Data loaded from plays{0}.pkl and values{0}.pkl'.format(load_filename))
+        agent_white.load_values(filename=load_filename)
     
     for game in range(1, max_games + 1):
         
@@ -37,7 +36,7 @@ def train_mcts(mcts_agent, max_games, max_moves, size, current_knowledge=False, 
             # get the possible moves for white
             possible_actions, possible_takes = board.get_moves('white')
             if len(possible_actions) == 0:
-                print('Game {}: Black wins'.format(game))
+                print('Game {}: Black/Red wins'.format(game))
                 break    
             
             if debug: tic = time.perf_counter()
@@ -57,7 +56,7 @@ def train_mcts(mcts_agent, max_games, max_moves, size, current_knowledge=False, 
             # get the possible moves for black
             possible_actions, possible_takes = board.get_moves('black')
             if len(possible_actions) == 0:
-                print('Game {}: White wins'.format(game))
+                print('Game {}: White/Gray wins'.format(game))
                 break                  
             
             # select an action to update the board
@@ -74,7 +73,7 @@ def train_mcts(mcts_agent, max_games, max_moves, size, current_knowledge=False, 
                 break        
         
         # save dictionary
-        agent_white.save_values()
+        agent_white.save_values(filename=save_filename)
         print('Performed {} moves'.format(len(agent_white.values)))
 
 
@@ -82,19 +81,19 @@ def train_mcts(mcts_agent, max_games, max_moves, size, current_knowledge=False, 
 Play a single game between two specified agents 
 and visualise the results.
 """
-def play_game(agent_white, agent_black, board, max_moves):
+def play_game(agent_white, agent_black, board, max_moves, visual="terminal"):
     
     for mov in range(max_moves):
         
         print('Move: {} ---------------------------\n'.format(2* mov + 1))
         
         # white player moves ------------------------
-        board.show_board()
+        board.show_board(visual=visual)
         
         possible_actions, possible_takes = board.get_moves('white')
         
         if len(possible_actions) == 0:
-            print('Black has won the game!')
+            print('Black/Red has won the game!')
             break     
             
         chosen_piece, chosen_move, chosen_take = agent_white.select_action(possible_actions, possible_takes, board.data)
@@ -106,12 +105,12 @@ def play_game(agent_white, agent_black, board, max_moves):
         print('Move: {} ---------------------------\n'.format(2*mov + 2))
         
         # black player moves ------------------------
-        board.show_board()
+        board.show_board(visual=visual)
         
         possible_actions, possible_takes = board.get_moves('black')
         
         if len(possible_actions) == 0:
-            print('White has won the game!')
+            print('White/Gray has won the game!')
             break        
         
         chosen_piece, chosen_move, chosen_take = agent_black.select_action(possible_actions, possible_takes, board.data)
@@ -128,7 +127,7 @@ def play_game(agent_white, agent_black, board, max_moves):
 Play a single game against a specified player with a 
 human acting as the black player.
 """            
-def play_player(agent_white, board, max_moves):
+def play_player(agent_white, board, max_moves, visual="terminal"):
     
     agent_black = Random_Actor('black')
     
@@ -137,16 +136,16 @@ def play_player(agent_white, board, max_moves):
         print('Move: {} ---------------------------\n'.format(2* mov + 1))
         
         # white player moves --------------------------
-        board.show_board()
+        board.show_board(visual=visual)
         
         possible_actions, possible_takes = board.get_moves('white')
         
         if len(possible_actions) == 0:
-            print('Black has won the game!')
+            print('Black/Red has won the game!')
             break     
             
         chosen_piece, chosen_move, chosen_take = agent_white.select_action(possible_actions, possible_takes, board.data)
-        print('White moves {} to {}\n'.format(chosen_piece, (chosen_move[0], chosen_move[1])))
+        print('White/Gray moves {} to {}\n'.format(chosen_piece, (chosen_move[0], chosen_move[1])))
         board.update('white', chosen_piece, chosen_move, chosen_take)     
         
         #------------------------------------------------
@@ -154,13 +153,13 @@ def play_player(agent_white, board, max_moves):
         print('Move: {} ---------------------------\n'.format(2*mov + 2))
         
         # black player moves  --------------------------
-        board.show_board()
+        board.show_board(visual=visual)
         
         possible_actions, possible_takes = board.get_moves('black')
         corrected_actions = agent_black.ensure_jump(possible_actions, possible_takes)
         
         if len(possible_actions) == 0:
-            print('White has won the game!')
+            print('White/Gray has won the game!')
             break 
         
         print('Please select a move from the following actions:')
@@ -193,7 +192,7 @@ def play_player(agent_white, board, max_moves):
                 
                 move_chosen = True
 
-        print('Black moves {} to {}\n'.format(chosen_piece, (chosen_move[0], chosen_move[1])))
+        print('Black/Red moves {} to {}\n'.format(chosen_piece, (chosen_move[0], chosen_move[1])))
         board.update('black', chosen_piece, chosen_move, chosen_take)     
         
         #------------------------------------------------
