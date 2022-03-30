@@ -1,6 +1,7 @@
 # Checker AI with Monte Carlo Tree Search  
 
-This is repository containing the code for playing checkers using Monte-Carlo-Tree-Search (MCTS). 
+This is repository contains the code for playing checkers using Monte-Carlo-Tree-Search (MCTS). This project is an extension of the work performed at the 2021 Reinforcement Learning Summer School at the Turing Institute https://www.turing.ac.uk/. 
+
 The package contains the code for:
 * Simulating the board
 * Training the MCTS agent
@@ -9,9 +10,9 @@ The package contains the code for:
 
 Here is an example of the MCTS performance after training on only 50 games of self play:
 
-MCTS vs. Random Player           |  MCTS vs. Human Player
-:-------------------------------:|:--------------------------------:
-![](./videos/mcts_vs_random.gif) | ![](./videos/mcts_vs_player.gif)
+MCTS (Red) vs. Random Player (Gray)    |  MCTS (Red) vs. Human Player (Gray)
+:-------------------------------------:|:--------------------------------:
+![](./videos/mcts_vs_random.gif)       |     ![](./videos/mcts_vs_player.gif)
 
 ## Installation
 
